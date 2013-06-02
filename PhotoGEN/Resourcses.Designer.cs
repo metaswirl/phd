@@ -60,6 +60,34 @@ namespace PhotoGEN {
             }
         }
         
+        public static byte[] _01_gut {
+            get {
+                object obj = ResourceManager.GetObject("_01_gut", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] _02_schlecht {
+            get {
+                object obj = ResourceManager.GetObject("_02_schlecht", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] _03_schlecht {
+            get {
+                object obj = ResourceManager.GetObject("_03_schlecht", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        public static byte[] _04_schlecht {
+            get {
+                object obj = ResourceManager.GetObject("_04_schlecht", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         public static byte[] WP_000184 {
             get {
                 object obj = ResourceManager.GetObject("WP_000184", resourceCulture);

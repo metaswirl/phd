@@ -93,6 +93,10 @@
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Resources\01_gut" />
+    <None Include="Resources\02_schlecht" />
+    <None Include="Resources\03_schlecht" />
+    <None Include="Resources\04_schlecht" />
     <None Include="Resources\WP_000184" />
     <None Include="Resources\WP_0001842" />
     <None Include="Service References\ImageDataWebService\my_dispatcher.wsdl" />

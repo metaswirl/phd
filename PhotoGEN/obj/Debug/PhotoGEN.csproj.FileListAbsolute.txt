@@ -14,3 +14,19 @@ C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\Pho
 C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\PhotoGEN.xap
 C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\PhotoGEN.dll
 C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\PhotoGEN.pdb
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\Bin\Debug\ApplicationIcon.png
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\Bin\Debug\Background.png
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\Bin\Debug\PhotoGEN.dll
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\Bin\Debug\PhotoGEN.pdb
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\Bin\Debug\AppManifest.xaml
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\Bin\Debug\PhotoGEN.xap
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\App.g.i.cs
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\MainPage.g.i.cs
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\PhotoGEN.g.resources
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\PhotoGEN.Resourcses.resources
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\PhotoGEN.dll
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\PhotoGEN.pdb
+C:\Users\afenske\Downloads\PortableGit-1.7.9-preview20120201\phd\PhotoGEN\obj\Debug\XapCacheFile.xml

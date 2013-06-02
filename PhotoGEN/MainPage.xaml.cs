@@ -49,37 +49,77 @@ namespace PhotoGEN
                 {
                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
-                        using (MemoryStream stream = new MemoryStream(Resourcses.WP_0001842))
-                        {
-                            WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(stream);
+                        int[] pixel = null;
+                        int PixelHeight=0;
+                        int PixelWidth=0;
 
-                            byte[] data = new byte[bitmap.Pixels.Length * 3];
-                            int h = bitmap.PixelHeight;
-                            int w = bitmap.PixelWidth;
+                        bool rotateFlip = false;
+
+                        if(imgExample.Visibility == Visibility.Visible)
+                        {
+
+                            WriteableBitmap bitmap = imgExample.Source as WriteableBitmap;
+                            //using (MemoryStream stream = new MemoryStream(bmp.))
+                            //{
+                            //    WriteableBitmap bitmap = PictureDecoder.DecodeJpeg(stream);
+                            pixel = (int[])bitmap.Pixels.Clone();
+                            PixelHeight = bitmap.PixelHeight;
+                            PixelWidth = bitmap.PixelWidth;
+                            //}
+                            rotateFlip = false;
+                        }
+                        else
+                        {
+                            pixel = new int[(int)(cam.PreviewResolution.Width*cam.PreviewResolution.Height)];
+                            cam.GetPreviewBufferArgb32(pixel);
+                            PixelHeight = (int)cam.PreviewResolution.Height;
+                            PixelWidth = (int)cam.PreviewResolution.Width;
+                            rotateFlip = true;
+                        }
+
+
+                        
+
+                            byte[] data = new byte[(PixelHeight * PixelWidth * 3)];
+                            int h =PixelHeight;
+                            int w =PixelWidth;
                             int l = data.Length-3;
                             for (int x = 0; x < w; x++ )
                             {
                                 for(int y=0; y<h; y++)
                                 {
-                                    int pixel = (y*w) + x;
-                                    int dataPos = (y * (w*3)) + ((w-x-1)*3);
+                                    int p = ((y*w) + x);
+                                    int dataPos = 0;
+                                    if(rotateFlip)
+                                    {
+                                        dataPos = (y*(w*3)) + ((w - x - 1)*3);
 
-                                    data[l-dataPos + 0] = (byte)((bitmap.Pixels[pixel] & 0x00FF0000) >> 16);
-                                    data[l-dataPos + 1] = (byte)((bitmap.Pixels[pixel] & 0x0000FF00) >> 8);
-                                    data[l-dataPos + 2] = (byte)((bitmap.Pixels[pixel] & 0x000000FF));
+                                        data[l - dataPos + 0] = (byte)((pixel[p] & 0x00FF0000) >> 16);
+                                        data[l - dataPos + 1] = (byte)((pixel[p] & 0x0000FF00) >> 8);
+                                        data[l - dataPos + 2] = (byte)((pixel[p] & 0x000000FF));
+                                    }
+                                    else
+                                    {
+                                        dataPos = (y * (w * 3)) + (x * 3);
+
+                                        data[dataPos + 0] = (byte)((pixel[p] & 0x00FF0000) >> 16);
+                                        data[dataPos + 1] = (byte)((pixel[p] & 0x0000FF00) >> 8);
+                                        data[dataPos + 2] = (byte)((pixel[p] & 0x000000FF));
+                                    }
+                                    
                                 }
                             }
+
+//                           BitmapEncoder encoder = BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
 
                             WebClient wc = new WebClient();
                             wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
                             wc.UploadStringCompleted += new UploadStringCompletedEventHandler(ImageServiceRequestCompleted);
 
-                            wc.UploadStringAsync(new Uri("http://172.16.1.201:8080/actions/upload_picture"), "POST",
-                                                     "width=" + bitmap.PixelWidth + "&picture=" + HttpUtility.UrlEncode(Convert.ToBase64String(data)));
-                        }
+                            wc.UploadStringAsync(new Uri("http://172.16.1.201:8080/actions/upload_picture"), "POST", "width=" + PixelWidth + "&picture=" + HttpUtility.UrlEncode(Convert.ToBase64String(data)));                        
                     });
                 }
-                break;
+                System.Threading.Thread.Sleep(5000);
             }
         }
 
@@ -95,7 +135,19 @@ namespace PhotoGEN
                     {
                         brdMain.BorderBrush = new SolidColorBrush(Color.FromArgb(255,0,255,0));
                     }
+                    else
+                    {
+                        brdMain.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    }
                 }
+                else
+                {
+                    brdMain.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 128));
+                }
+            }
+            else
+            {
+                brdMain.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 128));
             }
         }
 
@@ -380,5 +432,38 @@ namespace PhotoGEN
         }
 
 
+        private void ShowCameraImage(object sender, RoutedEventArgs e)
+        {
+            viewfinderCanvas.Visibility = Visibility.Visible;
+            imgExample.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowImage1(object sender, RoutedEventArgs e)
+        {
+            viewfinderCanvas.Visibility = Visibility.Collapsed;
+            imgExample.Visibility = Visibility.Visible;
+            imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._02_schlecht));
+        }
+
+        private void ShowImage2(object sender, RoutedEventArgs e)
+        {
+            viewfinderCanvas.Visibility = Visibility.Collapsed;
+            imgExample.Visibility = Visibility.Visible;
+            imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._03_schlecht));
+        }
+
+        private void ShowImage3(object sender, RoutedEventArgs e)
+        {
+            viewfinderCanvas.Visibility = Visibility.Collapsed;
+            imgExample.Visibility = Visibility.Visible;
+            imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._04_schlecht));
+        }
+
+        private void ShowImage4(object sender, RoutedEventArgs e)
+        {
+            viewfinderCanvas.Visibility = Visibility.Collapsed;
+            imgExample.Visibility = Visibility.Visible;
+            imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._01_gut));
+        }
     }
 }

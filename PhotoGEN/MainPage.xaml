@@ -16,36 +16,47 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="480"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Landscape" Orientation="LandscapeLeft"
+    SupportedOrientations="Portrait" Orientation="PortraitUp"
     shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="640" />
-            <ColumnDefinition Width="160" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="640" />
+            <RowDefinition Height="160" />
+        </Grid.RowDefinitions>
         
-        <Border Grid.Column="0" x:Name="brdMain" BorderBrush="DeepPink" BorderThickness="5"  >
-            <Canvas x:Name="viewfinderCanvas" Width="620" Height="460"   HorizontalAlignment="Left" >
-                <!--Camera viewfinder -->
-                <Canvas.Background>
-                    <VideoBrush x:Name="viewfinderBrush" />
-                </Canvas.Background>            
-            </Canvas>
+        <Border Grid.Row="0" x:Name="brdMain" BorderBrush="DeepPink" BorderThickness="5"  >
+            <StackPanel>
+                <Canvas x:Name="viewfinderCanvas" Width="620" Height="460"   HorizontalAlignment="Left" >
+                    <!--Camera viewfinder -->
+                    <Canvas.Background>
+                        <VideoBrush x:Name="viewfinderBrush" />
+                    </Canvas.Background>            
+                </Canvas>
+                <Image x:Name="imgExample" Visibility="Collapsed" />
+            </StackPanel>
         </Border>
 
         <!--Button StackPanel to the right of viewfinder>-->
-        <StackPanel Grid.Column="1" >
-            <Button Content="CAP"/>            
+        <StackPanel Grid.Row="1" >
+            <StackPanel Orientation="Horizontal">
+                <Button Content="CAM"  Click="ShowCameraImage"/>
+                <Button Content="IM 1" Click="ShowImage1" />
+                <Button Content="IM 2" Click="ShowImage2" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="IM 3" Click="ShowImage3" />
+                <Button Content="IM 4" Click="ShowImage4" />
+            </StackPanel>
         </StackPanel>
 
         <!--Used for debugging >-->
-        <TextBlock Height="40" HorizontalAlignment="Left" Margin="8,428,0,0" Name="txtDebug" VerticalAlignment="Top" Width="626" FontSize="24" FontWeight="ExtraBold" />
+        <TextBlock Height="40" HorizontalAlignment="Left" Margin="8,428,0,0" Name="txtDebug" VerticalAlignment="Top" Width="626" FontSize="24" FontWeight="ExtraBold" Visibility="Collapsed" />        
     </Grid>
 
 </phone:PhoneApplicationPage>
