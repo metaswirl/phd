@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://example.com/sample.wsdl" name="my_dispatcher" targetNamespace="http://example.com/sample.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" />
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://example.com/sample.wsdl">
+      <xsd:element name="Adder">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element name="a" type="xsd:int" />
+            <xsd:element name="b" type="xsd:int" />
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AdderResponse">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element name="AddResult" type="xsd:int" />
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="AdderInput">
+    <wsdl:part name="parameters" element="tns:Adder" />
+  </wsdl:message>
+  <wsdl:message name="AdderOutput">
+    <wsdl:part name="parameters" element="tns:AdderResponse" />
+  </wsdl:message>
+  <wsdl:portType name="my_dispatcherPortType">
+    <wsdl:operation name="Adder">
+      <wsdl:documentation>
+				Add two values
+			</wsdl:documentation>
+      <wsdl:input message="tns:AdderInput" />
+      <wsdl:output message="tns:AdderOutput" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="my_dispatcherBinding" type="tns:my_dispatcherPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Adder">
+      <soap:operation soapAction="http://localhost:8008/Adder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="my_dispatcherService">
+    <wsdl:documentation>
+    </wsdl:documentation>
+    <wsdl:port name="my_dispatcher" binding="tns:my_dispatcherBinding">
+      <soap:address location="http://localhost:8008/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

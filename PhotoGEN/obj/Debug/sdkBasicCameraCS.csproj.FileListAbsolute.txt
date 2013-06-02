@@ -1,0 +1,16 @@
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\ApplicationIcon.png
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\Background.png
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\sdkBasicCameraCS.dll
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\sdkBasicCameraCS.pdb
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\AppManifest.xaml
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\Bin\Debug\sdkBasicCameraCS.xap
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\App.g.i.cs
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\MainPage.g.i.cs
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\sdkBasicCameraCS.g.resources
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\sdkBasicCameraCS.dll
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\sdkBasicCameraCS.pdb
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\XapCacheFile.xml
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\sdkBasicCameraCS.Resourcses.resources
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\afenske\Downloads\Basic Camera Sample\C#\sdkBasicCameraCS\obj\Debug\GenerateResource.write.1.tlog

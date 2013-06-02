@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="my_dispatcherBinding" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:8008/" binding="basicHttpBinding"
+                bindingConfiguration="my_dispatcherBinding" contract="ImageDataWebService.my_dispatcherPortType"
+                name="my_dispatcher" />
+        </client>
+    </system.serviceModel>
+</configuration>
