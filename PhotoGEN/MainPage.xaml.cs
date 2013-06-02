@@ -19,6 +19,9 @@ namespace PhotoGEN
 {
     public partial class MainPage : PhoneApplicationPage
     {
+
+        string name = "cam";
+
         // Variables
         PhotoCamera cam;
 
@@ -54,7 +57,7 @@ namespace PhotoGEN
                         int PixelWidth=0;
 
                         bool rotateFlip = false;
-
+                        
                         if(imgExample.Visibility == Visibility.Visible)
                         {
 
@@ -77,49 +80,47 @@ namespace PhotoGEN
                             rotateFlip = true;
                         }
 
-
-                        
-
-                            byte[] data = new byte[(PixelHeight * PixelWidth * 3)];
-                            int h =PixelHeight;
-                            int w =PixelWidth;
-                            int l = data.Length-3;
-                            for (int x = 0; x < w; x++ )
+                        byte[] data = new byte[(PixelHeight * PixelWidth * 3)];
+                        int h =PixelHeight;
+                        int w =PixelWidth;
+                        int l = data.Length-3;
+                        for (int x = 0; x < w; x++ )
+                        {
+                            for(int y=0; y<h; y++)
                             {
-                                for(int y=0; y<h; y++)
+                                int p = ((y*w) + x);
+                                int dataPos = 0;
+                                if(rotateFlip)
                                 {
-                                    int p = ((y*w) + x);
-                                    int dataPos = 0;
-                                    if(rotateFlip)
-                                    {
-                                        dataPos = (y*(w*3)) + ((w - x - 1)*3);
+                                    dataPos = (y*(w*3)) + ((w - x - 1)*3);
 
-                                        data[l - dataPos + 0] = (byte)((pixel[p] & 0x00FF0000) >> 16);
-                                        data[l - dataPos + 1] = (byte)((pixel[p] & 0x0000FF00) >> 8);
-                                        data[l - dataPos + 2] = (byte)((pixel[p] & 0x000000FF));
-                                    }
-                                    else
-                                    {
-                                        dataPos = (y * (w * 3)) + (x * 3);
-
-                                        data[dataPos + 0] = (byte)((pixel[p] & 0x00FF0000) >> 16);
-                                        data[dataPos + 1] = (byte)((pixel[p] & 0x0000FF00) >> 8);
-                                        data[dataPos + 2] = (byte)((pixel[p] & 0x000000FF));
-                                    }
-                                    
+                                    data[l - dataPos + 0] = (byte)((pixel[p] & 0x00FF0000) >> 16);
+                                    data[l - dataPos + 1] = (byte)((pixel[p] & 0x0000FF00) >> 8);
+                                    data[l - dataPos + 2] = (byte)((pixel[p] & 0x000000FF));
                                 }
+                                else
+                                {
+                                    dataPos = (y * (w * 3)) + (x * 3);
+
+                                    data[dataPos + 0] = (byte)((pixel[p] & 0x00FF0000) >> 16);
+                                    data[dataPos + 1] = (byte)((pixel[p] & 0x0000FF00) >> 8);
+                                    data[dataPos + 2] = (byte)((pixel[p] & 0x000000FF));
+                                }
+                                    
                             }
+                        }
 
 //                           BitmapEncoder encoder = BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
 
-                            WebClient wc = new WebClient();
-                            wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
-                            wc.UploadStringCompleted += new UploadStringCompletedEventHandler(ImageServiceRequestCompleted);
+                        WebClient wc = new WebClient();
+                        wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                        wc.UploadStringCompleted += new UploadStringCompletedEventHandler(ImageServiceRequestCompleted);
 
-                            wc.UploadStringAsync(new Uri("http://172.16.1.201:8080/actions/upload_picture"), "POST", "width=" + PixelWidth + "&picture=" + HttpUtility.UrlEncode(Convert.ToBase64String(data)));                        
+                        //wc.UploadStringAsync(new Uri("http://172.16.1.201:8080/actions/upload_picture"), "POST", "width=" + PixelWidth + "&picture=" + HttpUtility.UrlEncode(Convert.ToBase64String(data)));                        
+                        wc.UploadStringAsync(new Uri("http://192.168.137.170:8080/actions/upload_picture"), "POST", "name=" + name + "&width=" + PixelWidth + "&picture=" + HttpUtility.UrlEncode(Convert.ToBase64String(data)));                        
                     });
                 }
-                System.Threading.Thread.Sleep(5000);
+               System.Threading.Thread.Sleep(1000);
             }
         }
 
@@ -128,10 +129,11 @@ namespace PhotoGEN
             if(!string.IsNullOrEmpty(e.Result) && e.Result.StartsWith("OK "))
             {
                 string[] colorNames = e.Result.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-                if(colorNames.Length ==2 && !string.IsNullOrEmpty(colorNames[1]))
+                if(colorNames.Length ==3 && !string.IsNullOrEmpty(colorNames[1]) && !string.IsNullOrEmpty(colorNames[2]))
                 {
                     string colorName = colorNames[1];
-                    if(colorName == "green")
+                    string n = colorNames[2];
+                    if(colorName == "green" && n == "img4" )
                     {
                         brdMain.BorderBrush = new SolidColorBrush(Color.FromArgb(255,0,255,0));
                     }
@@ -436,6 +438,7 @@ namespace PhotoGEN
         {
             viewfinderCanvas.Visibility = Visibility.Visible;
             imgExample.Visibility = Visibility.Collapsed;
+            name = "cam";
         }
 
         private void ShowImage1(object sender, RoutedEventArgs e)
@@ -443,6 +446,7 @@ namespace PhotoGEN
             viewfinderCanvas.Visibility = Visibility.Collapsed;
             imgExample.Visibility = Visibility.Visible;
             imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._02_schlecht));
+            name = "img1";
         }
 
         private void ShowImage2(object sender, RoutedEventArgs e)
@@ -450,6 +454,7 @@ namespace PhotoGEN
             viewfinderCanvas.Visibility = Visibility.Collapsed;
             imgExample.Visibility = Visibility.Visible;
             imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._03_schlecht));
+            name = "img2";
         }
 
         private void ShowImage3(object sender, RoutedEventArgs e)
@@ -457,6 +462,7 @@ namespace PhotoGEN
             viewfinderCanvas.Visibility = Visibility.Collapsed;
             imgExample.Visibility = Visibility.Visible;
             imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._04_schlecht));
+            name = "img3";
         }
 
         private void ShowImage4(object sender, RoutedEventArgs e)
@@ -464,6 +470,7 @@ namespace PhotoGEN
             viewfinderCanvas.Visibility = Visibility.Collapsed;
             imgExample.Visibility = Visibility.Visible;
             imgExample.Source = PictureDecoder.DecodeJpeg(new MemoryStream(Resourcses._01_gut));
+            name = "img4";
         }
     }
 }
